@@ -51,7 +51,7 @@ class TeamController extends Controller
                 'success' => false,
                 'message' => [Util::throwExceptionMessage($e)],
                 'data' => []
-            ], HttpResponse::HTTP_OK);
+            ], HttpResponse::HTTP_BAD_REQUEST);
         }
     }
     /**
@@ -64,7 +64,7 @@ class TeamController extends Controller
             $per_page = \Request::get('per_page') ?: 10;
 
             $teams = Team::paginate($per_page);
-            if ($teams) throw new Exception('Error : Lo sentimos no hay equipos registrados.');
+            if (!$teams) throw new Exception('Error : Lo sentimos no hay equipos registrados.');
 
             return response(
                 [
@@ -79,7 +79,7 @@ class TeamController extends Controller
                 'success' => false,
                 'message' => [Util::throwExceptionMessage($e)],
                 'data' => []
-            ], HttpResponse::HTTP_OK);
+            ], HttpResponse::HTTP_BAD_REQUEST);
         }
     }
 }

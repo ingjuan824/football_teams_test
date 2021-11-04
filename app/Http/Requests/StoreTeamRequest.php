@@ -64,17 +64,7 @@ class StoreTeamRequest extends FormRequest
             'number_players.integer' => 'El número de jugadores no es válido.',
         ];
     }
-
-    public function response(array $errors)
-    {
-        if ($this->expectsJson()) {
-            return new JsonResponse($errors, 400);
-        }
-        return $this->redirector->to($this->getRedirectUrl())
-            ->withInput($this->except($this->dontFlash))
-            ->withErrors($errors, $this->errorBag);
-    }
-
+    
     /**
      * Handle a failed validation attempt.
      *

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,5 +33,14 @@ Route::group(['prefix' => 'divisions'], function () {
 });
 
 Route::group(['prefix' => 'cities'], function () {
+    Route::get('/', [CityController::class, 'index']);
+});
+
+Route::group(['prefix' => 'players'], function () {
+    Route::get('/', [PlayerController::class, 'index']);
+    Route::post('store', [PlayerController::class, 'store']);
+});
+
+Route::group(['prefix' => 'games'], function () {
     Route::get('/', [CityController::class, 'index']);
 });

@@ -22,7 +22,7 @@ class CreatePlayersTable extends Migration
             $table->integer('ta',)->comment('Tarjetas amarillas del jugador');
             $table->integer('goals',)->comment('Número de goles del jugador');
             $table->integer('pj',)->comment('Número de partidos jugados por el jugador');
-            $table->double('salary', 10, 2)->comment('Sueldo del jugador');
+            $table->double('salary', 15, 2)->comment('Sueldo del jugador');
             $table->boolean('status')->default(true);
             $table->timestamps();
 

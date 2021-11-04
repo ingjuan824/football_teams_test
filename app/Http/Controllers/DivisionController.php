@@ -35,7 +35,7 @@ class DivisionController extends Controller
                 'success' => false,
                 'message' => [Util::throwExceptionMessage($e)],
                 'data' => []
-            ], HttpResponse::HTTP_OK);
+            ], HttpResponse::HTTP_BAD_REQUEST);
         }
     }
 }
