@@ -63,7 +63,11 @@ class TeamController extends Controller
         try {
             $per_page = \Request::get('per_page') ?: 10;
 
-            $teams = Team::paginate($per_page);
+            $teams = Team::select('teams.*', 'ct.name as city_name', 'dv.name as division_name')
+            ->join('cities as ct', 'ct.id', '=', 'teams.city_id')
+            ->join('divisions as dv', 'dv.id', '=', 'teams.division_id')
+            ->paginate($per_page);
+            
             if (!$teams) throw new Exception('Error : Lo sentimos no hay equipos registrados.');
 
             return response(
