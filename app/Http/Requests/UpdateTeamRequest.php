@@ -2,16 +2,11 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response as HttpResponse;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Support\Arr;
-
-class StoreTeamRequest extends FormRequest
+use Illuminate\Contracts\Validation\Validator;
+class UpdateTeamRequest extends FormRequest
 {
-    /**
+     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
@@ -46,6 +41,7 @@ class StoreTeamRequest extends FormRequest
     public function messages()
     {
         return [
+            
             'name.required' => 'El nombre del equipo es requerido.',
             'name.string' => 'El nombre del equipo no es valido.',
 

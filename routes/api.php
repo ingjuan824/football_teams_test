@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CityController;
+use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,5 +23,14 @@ use Illuminate\Support\Facades\Route;
 
 // -------------- MODULE TEAMS -----------------------------------
 Route::group(['prefix' => 'teams'], function () {
+    Route::get('/', [TeamController::class, 'index']);
     Route::post('store', [TeamController::class, 'store']);
+});
+
+Route::group(['prefix' => 'divisions'], function () {
+    Route::get('/', [DivisionController::class, 'index']);
+});
+
+Route::group(['prefix' => 'cities'], function () {
+    Route::get('/', [CityController::class, 'index']);
 });

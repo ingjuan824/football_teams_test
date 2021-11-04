@@ -19,14 +19,16 @@ class TeamController extends Controller
     public function store(StoreTeamRequest $request)
     {
         try {
+            /// Creamos el equipo
             $team = Team::create([
                 'name' => $request->name,
                 'division_id' => $request->division_id,
                 'city_id' => $request->city_id,
                 'number_players' => $request->number_players,
-            ]); 
+            ]);
 
-            // $position = Classification::latest('position')->first();
+            /// Registramos  a el equipo en la tabla de posiciones 
+            ///y automaticamente le asignamos la ultima posicion
             Classification::create([
                 'team_id' =>  $team->id,
                 'pj' => 0,
@@ -45,6 +47,34 @@ class TeamController extends Controller
                 HttpResponse::HTTP_OK
             );
         } catch (\Throwable $e) {
+            return response([
+                'success' => false,
+                'message' => [Util::throwExceptionMessage($e)],
+                'data' => []
+            ], HttpResponse::HTTP_OK);
+        }
+    }
+    /**
+     * Funcion que permite listar todos los equipos registrados en el sistema
+     * @param $request['per_page'],Cantidad de registros por pagina
+     */
+    public function index()
+    {
+        try {
+            $per_page = \Request::get('per_page') ?: 10;
+
+            $teams = Team::paginate($per_page);
+            if ($teams) throw new Exception('Error : Lo sentimos no hay equipos registrados.');
+
+            return response(
+                [
+                    'success' => true,
+                    'messages' => ["Listado de equipos."],
+                    'data' => $teams
+                ],
+                HttpResponse::HTTP_OK
+            );
+        } catch (\Exception $e) {
             return response([
                 'success' => false,
                 'message' => [Util::throwExceptionMessage($e)],
