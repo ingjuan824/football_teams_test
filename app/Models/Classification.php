@@ -26,15 +26,15 @@ class Classification extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'position';
+    // protected $primaryKey = 'position';
 
     /**
      * Indicates if the IDs are auto-incrementing.
      *
      * @var bool
      */
-    public $incrementing = true;
-    public $auto_incrmenting = true;
+    // public $incrementing = true;
+    // public $auto_incrmenting = true;
 
 
 }

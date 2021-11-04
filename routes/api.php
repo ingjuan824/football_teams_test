@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\ClassificationController;
 use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Http\Request;
@@ -42,5 +44,9 @@ Route::group(['prefix' => 'players'], function () {
 });
 
 Route::group(['prefix' => 'games'], function () {
-    Route::get('/', [CityController::class, 'index']);
+    Route::post('store', [GameController::class, 'store']);
+});
+
+Route::group(['prefix' => 'classification'], function () {
+    Route::get('/', [ClassificationController::class, 'index']);
 });

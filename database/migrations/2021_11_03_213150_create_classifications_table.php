@@ -14,7 +14,8 @@ class CreateClassificationsTable extends Migration
     public function up()
     {
         Schema::create('classifications', function (Blueprint $table) {
-            $table->bigIncrements('position')->comment('Posición actual del equipo');
+            $table->id();
+            $table->integer('position')->comment('Posición actual del equipo');
             $table->unsignedBigInteger('team_id')->unique()->comment('Equipo relacionado a la posición');
             $table->integer('pj',)->default(0)->comment('Número de partidos jugados por el equipo');
             $table->integer('pg',)->default(0)->comment('Número de partidos ganados por el equipo');
@@ -24,8 +25,6 @@ class CreateClassificationsTable extends Migration
             $table->integer('points',)->default(0)->comment('Puntos obtenidos por el equipo');
             $table->boolean('status')->default(true);
             $table->timestamps();
-
-            //  $table->primary(['position']);
 
             // Agregamos las restricciones de clave externa
             // en los siguientes campos.

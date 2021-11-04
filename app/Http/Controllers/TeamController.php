@@ -29,8 +29,10 @@ class TeamController extends Controller
 
             /// Registramos  a el equipo en la tabla de posiciones 
             ///y automaticamente le asignamos la ultima posicion
+            $end_position = Classification::latest('id')->first();
             Classification::create([
-                'team_id' =>  $team->id
+                'team_id' =>  $team->id,
+                'position' =>  $end_position?  $end_position->id +1 :1
             ]);
             return response(
                 [
