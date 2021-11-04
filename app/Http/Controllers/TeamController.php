@@ -30,13 +30,7 @@ class TeamController extends Controller
             /// Registramos  a el equipo en la tabla de posiciones 
             ///y automaticamente le asignamos la ultima posicion
             Classification::create([
-                'team_id' =>  $team->id,
-                'pj' => 0,
-                'pg' => 0,
-                'pp' => 0,
-                'goals' => 0,
-                'points' => 0,
-                'status' => 0
+                'team_id' =>  $team->id
             ]);
             return response(
                 [
@@ -46,7 +40,7 @@ class TeamController extends Controller
                 ],
                 HttpResponse::HTTP_OK
             );
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
             return response([
                 'success' => false,
                 'message' => [Util::throwExceptionMessage($e)],
@@ -67,7 +61,7 @@ class TeamController extends Controller
             ->join('cities as ct', 'ct.id', '=', 'teams.city_id')
             ->join('divisions as dv', 'dv.id', '=', 'teams.division_id')
             ->paginate($per_page);
-            
+
             if (!$teams) throw new Exception('Error : Lo sentimos no hay equipos registrados.');
 
             return response(

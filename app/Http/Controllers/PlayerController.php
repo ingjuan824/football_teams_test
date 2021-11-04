@@ -38,7 +38,7 @@ class PlayerController extends Controller
                 ],
                 HttpResponse::HTTP_OK
             );
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
             return response([
                 'success' => false,
                 'message' => [Util::throwExceptionMessage($e)],

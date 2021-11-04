@@ -15,6 +15,7 @@ class Classification extends Model
         'pj',
         'pg',
         'pp',
+        'pe',
         'goals',
         'points',
         'status'

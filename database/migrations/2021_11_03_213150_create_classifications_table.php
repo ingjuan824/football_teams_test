@@ -16,11 +16,12 @@ class CreateClassificationsTable extends Migration
         Schema::create('classifications', function (Blueprint $table) {
             $table->bigIncrements('position')->comment('Posición actual del equipo');
             $table->unsignedBigInteger('team_id')->unique()->comment('Equipo relacionado a la posición');
-            $table->integer('pj',)->comment('Número de partidos jugados por el equipo');
-            $table->integer('pg',)->comment('Número de partidos ganados por el equipo');
-            $table->integer('pp',)->comment('Número de partidos perdidos por el equipo');
-            $table->integer('goals',)->comment('Número de goles del equipo');
-            $table->integer('points',)->comment('Puntos obtenidos por el equipo');
+            $table->integer('pj',)->default(0)->comment('Número de partidos jugados por el equipo');
+            $table->integer('pg',)->default(0)->comment('Número de partidos ganados por el equipo');
+            $table->integer('pp',)->default(0)->comment('Número de partidos perdidos por el equipo');
+            $table->integer('pe',)->default(0)->comment('Número de partidos empatados por el equipo');
+            $table->integer('goals',)->default(0)->comment('Número de goles del equipo');
+            $table->integer('points',)->default(0)->comment('Puntos obtenidos por el equipo');
             $table->boolean('status')->default(true);
             $table->timestamps();
 
