@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/', [TeamController::class, 'index']);
 Route::group(['prefix' => 'teams'], function () {
     Route::get('/', [TeamController::class, 'index'])->name('teams.index');
     Route::post('store', [TeamController::class, 'store'])->name('teams.store');
