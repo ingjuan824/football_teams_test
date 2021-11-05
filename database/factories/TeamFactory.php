@@ -16,7 +16,8 @@ class TeamFactory extends Factory
     public function definition()
     {
         return [
-            'name'=> $this->faker->sentence($nbWords = 6, $variableNbWords = true),
+            'name'=> $this->faker->state(),
+            // 'name'=> $this->faker->sentence($nbWords = 6, $variableNbWords = true),
             'division_id' => $this->faker->numberBetween($min = 1, $max = 2),
             'city_id' =>$this->faker->numberBetween($min = 1, $max = 32),
             'number_players' => $this->faker->numberBetween($min = 15, $max = 50),
