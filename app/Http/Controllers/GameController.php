@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GameRequest;
 use App\Models\Games;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response as HttpResponse;
 use App\Utils\Util;
@@ -20,8 +21,8 @@ class GameController extends Controller
     {
         try {
 
-            if( $request->local_team_id ==$request->away_team_id )
-            throw new Exception('Error : No se puede registar el partido porque los equipos seleccionados son iguales.');
+            if ($request->local_team_id == $request->away_team_id)
+                throw new Exception('Error : No se puede registar el partido porque los equipos seleccionados son iguales.');
 
             /// Registramos el partido
             $player = Games::create([
@@ -58,21 +59,9 @@ class GameController extends Controller
                 /// Actualizamos la clasificacion del equipo visitante
                 $this->updateClassificationTeam($request->away_team_id, 1, 0, 0, $request->away_goals, 3);
             }
-
-            return response(
-                [
-                    'success' => true,
-                    'messages' => ["Partido registrado con éxito."],
-                    'data' => $player
-                ],
-                HttpResponse::HTTP_OK
-            );
+            return back()->with('mensaje', 'Partido registrado con éxito.');
         } catch (\Exception $e) {
-            return response([
-                'success' => false,
-                'message' => [Util::throwExceptionMessage($e)],
-                'data' => []
-            ], HttpResponse::HTTP_BAD_REQUEST);
+            throw $e;
         }
     }
 
@@ -97,5 +86,26 @@ class GameController extends Controller
                 'goals' => DB::raw('goals + ' . $goals),
                 'points' => DB::raw('points + ' . $points),
             ]);
+    }
+
+    /**
+     * Funcion que permite listar todos los partidos registrados en el sistema
+     * @param $request['per_page'],Cantidad de registros por pagina
+     */
+    public function index()
+    {
+        try {
+            $per_page = \Request::get('per_page') ?: 10;
+
+            $teams = Team::get();
+            $games = Games::select('games.*', 'tl.name as team_local', 'ta.name as team_away')
+                ->join('teams as tl', 'tl.id', '=', 'games.local_team')
+                ->join('teams as ta', 'ta.id', '=', 'games.away_team')
+                ->paginate($per_page);
+            return view('games')->with("teams", $teams)
+                ->with("games", $games);
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 }

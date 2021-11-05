@@ -28,20 +28,9 @@ class ClassificationController extends Controller
 
             if (!$classfication) throw new Exception('Error : Lo sentimos no hay equipos registrados.');
 
-            return response(
-                [
-                    'success' => true,
-                    'messages' => ["Tabla de clasificación."],
-                    'data' => $classfication
-                ],
-                HttpResponse::HTTP_OK
-            );
+            return view('classification')->with("classfication",$classfication);
         } catch (\Exception $e) {
-            return response([
-                'success' => false,
-                'message' => [Util::throwExceptionMessage($e)],
-                'data' => []
-            ], HttpResponse::HTTP_BAD_REQUEST);
+            throw $e;
         }
     }
 }

@@ -20,33 +20,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/* Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-}); */
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-// -------------- MODULE TEAMS -----------------------------------
-Route::group(['prefix' => 'teams'], function () {
-    Route::get('/', [TeamController::class, 'index']);
-    Route::post('store', [TeamController::class, 'store']);
-});
 
-Route::group(['prefix' => 'divisions'], function () {
-    Route::get('/', [DivisionController::class, 'index']);
-});
-
-Route::group(['prefix' => 'cities'], function () {
-    Route::get('/', [CityController::class, 'index']);
-});
-
-Route::group(['prefix' => 'players'], function () {
-    Route::get('/', [PlayerController::class, 'index']);
-    Route::post('store', [PlayerController::class, 'store']);
-});
-
-Route::group(['prefix' => 'games'], function () {
-    Route::post('store', [GameController::class, 'store']);
-});
-
-Route::group(['prefix' => 'classification'], function () {
-    Route::get('/', [ClassificationController::class, 'index']);
-});

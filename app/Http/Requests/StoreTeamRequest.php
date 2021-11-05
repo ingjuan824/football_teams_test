@@ -73,7 +73,7 @@ class StoreTeamRequest extends FormRequest
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    protected function failedValidation(Validator $validator)
+/*     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(
             response()->json([
@@ -82,5 +82,5 @@ class StoreTeamRequest extends FormRequest
                 "data" => [],
             ], 400
         ));
-    }
+    } */
 }

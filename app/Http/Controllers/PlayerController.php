@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PlayerStoreRequest;
 use App\Models\Player;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response as HttpResponse;
 use App\Utils\Util;
@@ -30,20 +31,10 @@ class PlayerController extends Controller
                 'salary' => $request->salary,
             ]);
           
-            return response(
-                [
-                    'success' => true,
-                    'messages' => ["Jugador creado con éxito."],
-                    'data' => $player
-                ],
-                HttpResponse::HTTP_OK
-            );
+            return back()->with('mensaje','Jugador creado con éxito.');
+
         } catch (\Exception $e) {
-            return response([
-                'success' => false,
-                'message' => [Util::throwExceptionMessage($e)],
-                'data' => []
-            ], HttpResponse::HTTP_BAD_REQUEST);
+            throw $e;
         }
     }
 
@@ -55,26 +46,15 @@ class PlayerController extends Controller
     {
         try {
             $per_page = \Request::get('per_page') ?: 10;
-
+            $teams = Team::get();
             $players = Player::select('players.*', 'tm.name as team_name')
             ->join('teams as tm', 'tm.id', '=', 'players.team_id')
             ->paginate($per_page);
-            if (!$players) throw new Exception('Error : Lo sentimos no hay jugadores registrados.');
 
-            return response(
-                [
-                    'success' => true,
-                    'messages' => ["Listado de jugadores."],
-                    'data' => $players
-                ],
-                HttpResponse::HTTP_OK
-            );
+            return view('players')->with("teams",$teams)
+            ->with( "players", $players);
         } catch (\Exception $e) {
-            return response([
-                'success' => false,
-                'message' => [Util::throwExceptionMessage($e)],
-                'data' => []
-            ], HttpResponse::HTTP_BAD_REQUEST);
+            throw $e;
         }
     }
 }

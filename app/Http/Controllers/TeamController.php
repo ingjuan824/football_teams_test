@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTeamRequest;
+use App\Models\City;
 use App\Models\Classification;
+use App\Models\Division;
 use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response as HttpResponse;
@@ -19,6 +21,7 @@ class TeamController extends Controller
     public function store(StoreTeamRequest $request)
     {
         try {
+            
             /// Creamos el equipo
             $team = Team::create([
                 'name' => $request->name,
@@ -34,20 +37,10 @@ class TeamController extends Controller
                 'team_id' =>  $team->id,
                 'position' =>  $end_position?  $end_position->id +1 :1
             ]);
-            return response(
-                [
-                    'success' => true,
-                    'messages' => ["Equipo creado con éxito."],
-                    'data' => $team
-                ],
-                HttpResponse::HTTP_OK
-            );
+
+            return back()->with('mensaje','Equipo creado con éxito.');
         } catch (\Exception $e) {
-            return response([
-                'success' => false,
-                'message' => [Util::throwExceptionMessage($e)],
-                'data' => []
-            ], HttpResponse::HTTP_BAD_REQUEST);
+          throw $e;
         }
     }
     /**
@@ -64,22 +57,13 @@ class TeamController extends Controller
             ->join('divisions as dv', 'dv.id', '=', 'teams.division_id')
             ->paginate($per_page);
 
-            if (!$teams) throw new Exception('Error : Lo sentimos no hay equipos registrados.');
-
-            return response(
-                [
-                    'success' => true,
-                    'messages' => ["Listado de equipos."],
-                    'data' => $teams
-                ],
-                HttpResponse::HTTP_OK
-            );
+            $divisions = Division::get();
+            $cities = City::orderBy('name','ASC')->get();
+           
+            return view('football_teams')->with("teams",$teams)
+            ->with( "divisions", $divisions)->with( "cities", $cities);
         } catch (\Exception $e) {
-            return response([
-                'success' => false,
-                'message' => [Util::throwExceptionMessage($e)],
-                'data' => []
-            ], HttpResponse::HTTP_BAD_REQUEST);
+            throw $e;
         }
     }
 }
