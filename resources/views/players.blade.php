@@ -75,6 +75,7 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Nombre</th>
+                <th scope="col">Equipo</th>
                 <th scope="col">TR</th>
                 <th scope="col">TA</th>
                 <th scope="col">Goles</th>
@@ -93,7 +94,7 @@
                 <th>{{$player->ta}}</th>
                 <th>{{$player->goals}}</th>
                 <th>{{$player->pj}}</th>
-                <th>{{$player->salary}}</th>
+                <th>{{number_format($player->salary)}}</th>
             </tr>
 
             @endforeach

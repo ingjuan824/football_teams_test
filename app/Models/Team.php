@@ -20,4 +20,37 @@ class Team extends Model
         'city_id',
         'number_players'
     ];
+
+    /**
+     * Obtener la division del equipo.
+     */
+    public function division()
+    {
+        return $this->belongsTo(Division::class);
+    }
+
+    /**
+     * Obtener la ciudad del equipo.
+     */
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
+
+    /**
+     * Obtener los jugadores del equipo.
+     */
+    public function players()
+    {
+        return $this->hasMany(Player::class);
+    }
+
+    /**
+     * Obtener la clasificacion del equipo.
+     */
+    public function classification()
+    {
+        return $this->hasOne(Classification::class);
+    }
 }

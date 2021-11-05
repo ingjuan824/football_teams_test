@@ -55,6 +55,7 @@ class TeamController extends Controller
             $teams = Team::select('teams.*', 'ct.name as city_name', 'dv.name as division_name')
             ->join('cities as ct', 'ct.id', '=', 'teams.city_id')
             ->join('divisions as dv', 'dv.id', '=', 'teams.division_id')
+            ->orderBy('id','asc')
             ->paginate($per_page);
 
             $divisions = Division::get();

@@ -16,4 +16,20 @@ class Games extends Model
         'away_goals',
         'date'
     ];
+
+    /**
+     * Instancia del equipo local.
+     */
+    public function local_team()
+    {
+        return $this->belongsTo(Team::class, 'foreign_key', 'local_team');
+    }
+    /**
+     * Instancia del equipo visitante.
+     */
+    public function away_team()
+    {
+        return $this->belongsTo(Team::class, 'foreign_key', 'away_team');
+    }
+
 }

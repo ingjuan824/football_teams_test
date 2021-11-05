@@ -36,5 +36,11 @@ class Classification extends Model
     // public $incrementing = true;
     // public $auto_incrmenting = true;
 
-
+    /**
+     * Obtener el equipo del jugador.
+     */
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
 }

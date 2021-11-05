@@ -19,4 +19,12 @@ class Player extends Model
         'pj',
         'salary',
     ];
+
+    /**
+     * Obtener el equipo del jugador.
+     */
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
 }
