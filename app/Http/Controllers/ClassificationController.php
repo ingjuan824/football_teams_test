@@ -30,7 +30,7 @@ class ClassificationController extends Controller
 
             return view('classification')->with("classfication",$classfication);
         } catch (\Exception $e) {
-            throw $e;
+            return back()->withInput()->withErrors($e->getMessage());
         }
     }
 }

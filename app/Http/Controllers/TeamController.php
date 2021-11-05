@@ -40,7 +40,7 @@ class TeamController extends Controller
 
             return back()->with('mensaje','Equipo creado con éxito.');
         } catch (\Exception $e) {
-          throw $e;
+            return back()->withInput()->withErrors($e->getMessage());
         }
     }
     /**
@@ -63,7 +63,7 @@ class TeamController extends Controller
             return view('football_teams')->with("teams",$teams)
             ->with( "divisions", $divisions)->with( "cities", $cities);
         } catch (\Exception $e) {
-            throw $e;
+            return back()->withInput()->withErrors($e->getMessage());
         }
     }
 }

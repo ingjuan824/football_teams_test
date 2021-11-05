@@ -61,7 +61,7 @@ class GameController extends Controller
             }
             return back()->with('mensaje', 'Partido registrado con éxito.');
         } catch (\Exception $e) {
-            throw $e;
+            return back()->withInput()->withErrors($e->getMessage());
         }
     }
 
@@ -105,7 +105,7 @@ class GameController extends Controller
             return view('games')->with("teams", $teams)
                 ->with("games", $games);
         } catch (\Exception $e) {
-            throw $e;
+            return back()->withInput()->withErrors($e->getMessage());
         }
     }
 }

@@ -34,7 +34,7 @@ class PlayerController extends Controller
             return back()->with('mensaje','Jugador creado con éxito.');
 
         } catch (\Exception $e) {
-            throw $e;
+            return back()->withInput()->withErrors($e->getMessage());
         }
     }
 
@@ -54,7 +54,7 @@ class PlayerController extends Controller
             return view('players')->with("teams",$teams)
             ->with( "players", $players);
         } catch (\Exception $e) {
-            throw $e;
+            return back()->withInput()->withErrors($e->getMessage());
         }
     }
 }
