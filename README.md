@@ -1,65 +1,46 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Desarrollo de la prueba de registro y clasificación de equipo
+La prueba se desarrollo en base a la imagen proporcionada por el entrevistador , tomando como base la tecnologia laravel y su motor de plantillas blade.
 
-## About Laravel
+![Inkedimagen_prueba_LI](https://user-images.githubusercontent.com/68650185/140445062-d871ad5f-9b1f-4521-b6fa-83d70d50290d.jpg)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Modelo entidad relación propuesto
+![football_teams_mer](https://user-images.githubusercontent.com/68650185/140444769-c03b31c8-4b6d-45eb-b71d-610bc6ef5b71.png)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Clonar el repositorio
+$ git clone https://github.com/ingjuan824/football_teams_test.git
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## Instalación de dependencias
+$ composer install
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Correr migraciones
+Crear la respectiva base de datos con el motor MySql, configurarlo en las variables de entorno en el arhivo .env
+y ejecutar el siguiente comando
+$ php artisan migrate
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Ejecutar seeders incluyendo los factories
+Nota : El proyecto genera por defecto 5 equipos con nombres aleatorios haciendo uso de los factories
+$ php artisan db:seed
 
-## Laravel Sponsors
+## Generar el secret key del proyecto 
+$ php artisan key:generate
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Iniciando el servidor 
+$ php artisan serve
 
-### Premium Partners
+## Ruta principal
+http://127.0.0.1:8000/
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Screenshots
+![image](https://user-images.githubusercontent.com/68650185/140445573-0ac8b844-b9e6-408c-9f7e-eca06312ad45.png)
 
-## Contributing
+![image](https://user-images.githubusercontent.com/68650185/140445774-e50f7177-5161-49f1-9c2a-e66079eb0c5d.png)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+![image](https://user-images.githubusercontent.com/68650185/140445798-6762e43d-c848-423a-b5e4-7e02204324a2.png)
 
-## Code of Conduct
+![image](https://user-images.githubusercontent.com/68650185/140445821-35473e2b-5762-4e37-a9f0-7c8ce6db1fbf.png)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Gracias por su revisión!
